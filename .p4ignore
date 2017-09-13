@@ -1,0 +1,13 @@
+Library
+obj
+bin
+Temp
+Builds
+*.csproj
+*.sln
+*.suo
+*.unityproj
+*.unityprefs
+.DS_Store
+.idea/*
+.idea
