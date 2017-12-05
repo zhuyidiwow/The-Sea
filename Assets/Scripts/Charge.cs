@@ -14,12 +14,10 @@ public class Charge : MonoBehaviour {
 	public bool CanBePickedUp = true;
 	
 	private Rigidbody rb;
-	private AudioSource audioSource;
-	
+
 	void Start() {
 		rb = GetComponent<Rigidbody>();
 		ChargeDirection = (Points[1].position - Points[0].position).normalized;
-		audioSource = GetComponent<AudioSource>();
 	}
 	
 	public void ReceiveBuoyancy(float buoyancyMagnitude) {
@@ -31,7 +29,6 @@ public class Charge : MonoBehaviour {
 	}
 
 	public void GetPickedUp() {
-		audioSource.Play();
 		CanBePickedUp = false;
 		Destroy(Arrow);
 		foreach (MeshCollider mesh in transform.GetComponentsInChildren<MeshCollider>()) {

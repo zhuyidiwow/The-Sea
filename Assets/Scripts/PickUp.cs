@@ -11,11 +11,9 @@ public class PickUp : MonoBehaviour {
 	public bool CanBePickedUp = true;
 	
 	private Rigidbody rb;
-	private AudioSource audioSource;
 
 	void Start() {
 		rb = GetComponent<Rigidbody>();
-		audioSource = GetComponent<AudioSource>();
 	}
 	
 	public void ReceiveBuoyancy(float buoyancyMagnitude) {
@@ -27,7 +25,6 @@ public class PickUp : MonoBehaviour {
 	}
 
 	public void GetPickedUp() {
-		audioSource.Play();
 		CanBePickedUp = false;
 		Destroy(Energy);
 		foreach (MeshCollider mesh in transform.GetComponentsInChildren<MeshCollider>()) {

@@ -43,7 +43,6 @@ public class Friendly : MonoBehaviour {
 	private const float particleMovingRadius = 2.5f;
 	private ParticleSystem.ForceOverLifetimeModule forceOverLifetimeModule;
 	private float energy;
-	private AudioSource audioSource;
 	
 	void Start() {
 		rb = GetComponent<Rigidbody>();
@@ -52,7 +51,6 @@ public class Friendly : MonoBehaviour {
 		baseRotationSpeed = SailRotationSpeed;
 		rb.isKinematic = true;
 		Particles.SetActive(false);
-		audioSource = GetComponent<AudioSource>();
 	}
 
 	private void FixedUpdate() {
@@ -148,7 +146,6 @@ public class Friendly : MonoBehaviour {
 	}
 
 	public void Sink() {
-		audioSource.Play();
 		IsSunk = true;
 		rb.velocity = rb.velocity / 3f;
 		StartCoroutine(SinkCoroutine());

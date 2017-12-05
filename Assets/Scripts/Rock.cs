@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Rock : MonoBehaviour {
 
-	public AudioClip[] AudioClips;
 	public float maxZ;
 	public float minZ;
 	public GameObject Splash;
@@ -12,20 +11,16 @@ public class Rock : MonoBehaviour {
 	private Vector3 InitialDirection;
 	private Rigidbody rb;
 	private bool hasHurtPlayer = false;
-	private AudioSource audioSource;
 
 	private void Awake() {
 		rb = GetComponent<Rigidbody>();
 		rb.isKinematic = true;
-		audioSource = GetComponent<AudioSource>();
 	}
 
 	public void GetThorwnOut() {
 		rb.isKinematic = false;
 		InitialDirection = new Vector3(Random.Range(-1f, 1f), Random.Range(1f, 1.5f), Random.Range(minZ, maxZ));
 		rb.velocity = InitialSpeed * InitialDirection.normalized;
-		audioSource.clip = AudioClips[0];
-		audioSource.Play();
 	}
 	
 	private void FixedUpdate() {
@@ -38,8 +33,7 @@ public class Rock : MonoBehaviour {
 		if (other.gameObject.CompareTag("Water Surface")) {
 			rb.velocity *= 0.3f;
 			rb.drag = 1f;
-			audioSource.clip = AudioClips[1];
-			audioSource.Play();
+
 			Instantiate(Splash, transform.position, new Quaternion());
 			Destroy(gameObject, 2f);
 		}
@@ -50,15 +44,11 @@ public class Rock : MonoBehaviour {
 			if (!hasHurtPlayer) {
 				hasHurtPlayer = true;
 				GetterUtility.GetPlayer().TakeDamage(20f);
-				audioSource.clip = AudioClips[2];
-				audioSource.Play();
 			}
 		}
 
 		if (collision.gameObject.CompareTag("Friendly")) {
 			if (!hasHurtPlayer) {
-				audioSource.clip = AudioClips[2];
-				audioSource.Play();
 				hasHurtPlayer = true;
 				collision.gameObject.GetComponent<Friendly>().Sink();
 			}

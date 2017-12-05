@@ -41,7 +41,6 @@ public class CallBackTrigger : MonoBehaviour {
 
 	public void EnterScene2() {
 		GetterUtility.GetLightManager().EnterScene2();
-		GetterUtility.GetBgmManager().PlayHappyClip();
 	}
 
 	public void EnterScene3() {
@@ -50,7 +49,6 @@ public class CallBackTrigger : MonoBehaviour {
 	}
 
 	public void EnterScene4() {
-		GetterUtility.GetBgmManager().PlaySadClip();
 		GetterUtility.GetLightManager().EnterScene4();
 		GetterUtility.GetCameraManager().ChangePosition(60f, 40f, 0f);
 		GetterUtility.GetPlayer().InRain();

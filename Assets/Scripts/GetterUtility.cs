@@ -43,24 +43,4 @@ public static class GetterUtility {
             return null;
         }
     }
-
-    public static Thunder GetThunder() {
-        Thunder thunder = GameObject.Find("Thunder").GetComponent<Thunder>();
-
-        if (thunder != null) {
-            return thunder;
-        } else {
-            return null;
-        }
-    }
-
-    public static BGMManager GetBgmManager() {
-        BGMManager bgmManager = GameObject.Find("BGM Manager").GetComponent<BGMManager>();
-        
-        if (bgmManager != null) {
-            return bgmManager;
-        } else {
-            return null;
-        }
-    }
 }

@@ -58,8 +58,7 @@ public class Player : MonoBehaviour {
 	private Vector3 lastChargeDirection;
 	private float lastChargeDistance;
 	private float lastChargeSpeed;
-	private AudioSource audioSource;
-	
+
 	void Start() {
 		rb = GetComponent<Rigidbody>();
 		baseSpeed = horizontalSpeedCap;
@@ -70,7 +69,6 @@ public class Player : MonoBehaviour {
 		Wind.SetForce(5f);
 		Wind.SetDirection(new Vector3(1f, 0f, 0f));
 		Freeze();
-		audioSource = GetComponent<AudioSource>();
 	}
 
 	public void Freeze() {
@@ -125,8 +123,6 @@ public class Player : MonoBehaviour {
 		} else {
 			rb.drag = 0f;
 		}
-		
-		UpdateWaveSound();
 	}
 
 	public void Charge(Vector3 direction, float distance, float speed) {
@@ -230,12 +226,33 @@ public class Player : MonoBehaviour {
 	}
 
 	private void ReceiveInput() {
-		if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
+		if (Input.GetKey(KeyCode.A)) {
 			RotateSailBy(-SailRotationSpeed * Time.deltaTime);
 		}
 
-		if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
+		if (Input.GetKey(KeyCode.D)) {
 			RotateSailBy(SailRotationSpeed * Time.deltaTime);
+		}
+
+		//TODO: debug only code
+		if (Input.GetKey(KeyCode.Keypad9)) {
+			Wind.SetDirection(new Vector3(1f, 0f, 1f).normalized);
+		}
+
+		if (Input.GetKey(KeyCode.Keypad6)) {
+			Wind.SetDirection(new Vector3(1f, 0f, 0f));
+		}
+
+		if (Input.GetKey(KeyCode.Keypad3)) {
+			Wind.SetDirection(new Vector3(1f, 0f, -1f).normalized);
+		}
+
+		if (Input.GetKey(KeyCode.UpArrow)) {
+			Wind.Force += Time.deltaTime * 2f;
+		}
+
+		if (Input.GetKey(KeyCode.DownArrow)) {
+			Wind.Force -= Time.deltaTime * 2f;
 		}
 
 		if (Input.GetKeyDown(KeyCode.T)) {
@@ -300,10 +317,5 @@ public class Player : MonoBehaviour {
 			}
 			yield return new WaitForSeconds(Time.deltaTime);
 		}
-	}
-	
-	private void UpdateWaveSound() {
-		audioSource.volume = 0.8f * rb.velocity.magnitude / baseSpeed;
-		audioSource.pitch = 1.2f + (rb.velocity.magnitude / baseSpeed) / 5f;
 	}
 }

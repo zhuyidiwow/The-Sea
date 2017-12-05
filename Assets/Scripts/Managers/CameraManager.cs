@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour {
-	public AudioClip WaveSound;
+
 	public float Distance;
 	[Tooltip("From South, looking from East, clockwise")]
 	public float VerticalAngle;
@@ -28,8 +28,7 @@ public class CameraManager : MonoBehaviour {
 	private Vector3 playerPosition;
 	private Animator animator;
 	private bool canExit = false;
-	
-	
+
 	void Start() {
 		player = GetterUtility.GetPlayer();
 		VerticalAngleInRad = VerticalAngle * Mathf.Deg2Rad;
@@ -137,7 +136,7 @@ public class CameraManager : MonoBehaviour {
 		ShouldFollowPlayer = false;
 		// move camera to the starting position
 		float startTime = Time.time;
-		float duration = 3f;
+		float duration = 2f;
 		Vector3 originalPosition = transform.position;
 		Quaternion originalRotation = transform.rotation;
 		while (Time.time - startTime < duration) {
@@ -145,7 +144,7 @@ public class CameraManager : MonoBehaviour {
 			transform.rotation = Quaternion.Lerp(originalRotation, CameraFinaleTransform.rotation, (Time.time - startTime) / duration);
 			yield return new WaitForSeconds(Time.deltaTime/2f);
 		}
-		GameObject.Find("Rain").SetActive(false);
+		
 		FinaleAnimation.SetActive(true);
 		yield return new WaitForSeconds(3f);
 		StartCoroutine(DeemCoroutine());

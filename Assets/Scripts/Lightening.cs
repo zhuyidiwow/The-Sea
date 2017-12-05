@@ -12,7 +12,6 @@ public class Lightening : MonoBehaviour {
 	public void Lighten(float minDuration, float maxDuration, int times) {
 		light = GetComponent<Light>();
 		StartCoroutine(LightenCoroutine(minDuration, maxDuration, times));
-		GetterUtility.GetThunder().PlayThunderSound();
 	}
 
 	IEnumerator LightenCoroutine(float minDuration, float maxDuration, int times) {

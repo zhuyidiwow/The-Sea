@@ -9,22 +9,13 @@ public class Rain : MonoBehaviour {
 	public int RainDropPerInterval;
 	public Vector2 size;
 	private Player player;
-
-	private AudioSource audioSource;
 	
 	void Start () {
 		
 		player = GetterUtility.GetPlayer();
 		StartCoroutine(RainCoroutine());
-		audioSource = GetComponent<AudioSource>();
-		StartCoroutine(StartSoundCoroutine());
 	}
 
-	IEnumerator StartSoundCoroutine() {
-		yield return new WaitForSeconds(5.8f);
-		audioSource.Play();
-	}
-	
 	private IEnumerator RainCoroutine() {
 		float x;
 		float y;
