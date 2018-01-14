@@ -1,4 +1,4 @@
-# The-Sea
+# The Sea
 
 A lantern boat's journey.
 
